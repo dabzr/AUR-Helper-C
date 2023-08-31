@@ -1,2 +1,2 @@
 yay-clone:
-	gcc ./src/AURHelper.c -o yay-clone
+	gcc ./src/*.c -o ./bin/yay-clone
