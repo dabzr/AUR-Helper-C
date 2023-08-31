@@ -1,11 +1,12 @@
 #include "../include/aurhelper.h"
 
 void aur_help(char* name[]){
-  git_clone(name);
-  make_install(name);
+  git_clone(name); // clone the repo
+  make_install(name); // make install the program and clean the build
 }
 
 void git_clone(char* name[]){
+  //just git clones the arch user repository app
   char cmd[100];
   char git [5]= ".git";
   strcpy(cmd, "git clone https://aur.archlinux.org/");
@@ -16,13 +17,15 @@ void git_clone(char* name[]){
 
 void make_install (char *name[]){
   char cmd[100];
+  
   strcpy(cmd, "./");
   strcat(cmd, name[1]);
-  chdir(cmd);
-  char cmd2[30];
-  system("makepkg -si");
+  chdir(cmd); // go to the app directory
+
+  system("makepkg -si"); //installs the app
+
   chdir("..");
-  strcpy(cmd2, "rm -rf ");
-  strcat(cmd2, name[1]);
-  system(cmd2);
+  strcpy(cmd, "rm -rf "); //remove the directory
+  strcat(cmd, name[1]);
+  system(cmd);
 }
