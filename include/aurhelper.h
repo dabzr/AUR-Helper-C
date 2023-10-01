@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void aur_help(char *name[]);
-void git_clone(char *name[]);
-void make_install(char *name[]);
+void aur_help(char *repository_name);
+void git_clone(char *repository_name);
+void make_install(char *repository_name);
 

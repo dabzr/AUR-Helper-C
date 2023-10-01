@@ -1,31 +1,30 @@
 #include "../include/aurhelper.h"
 
-void aur_help(char* name[]){
-  git_clone(name); // clone the repo
-  make_install(name); // make install the program and clean the build
+void aur_help(char* repository_name){
+  git_clone(repository_name);
+  make_install(repository_name);
 }
 
-void git_clone(char* name[]){
-  //just git clones the arch user repository app
-  char cmd[100];
-  char git [5]= ".git";
-  strcpy(cmd, "git clone https://aur.archlinux.org/");
-  strcat(cmd, name[2]);
-  strcat(cmd, git);
-  system(cmd);
+void git_clone(char* repository_name){
+  char clone_command[100] = "git clone https://aur.archlinux.org/";
+  strcat(clone_command, repository_name);
+  strcat(clone_command, ".git");
+  system(clone_command);
 }
 
-void make_install (char *name[]){
-  char cmd[100];
-  
-  strcpy(cmd, "./");
-  strcat(cmd, name[2]);
-  chdir(cmd); // go to the app directory
+void clean_build(char *repository_name){
+  char rmdir[100] = "rm -rf ";
+  strcpy(rmdir, "rm -rf "); //remove the directory
+  strcat(rmdir, repository_name);
+  system(rmdir);
 
-  system("makepkg -si"); //installs the app
+}
+void make_install (char* repository_name){
+
+  chdir(repository_name);
+
+  system("makepkg -si");
 
   chdir("..");
-  strcpy(cmd, "rm -rf "); //remove the directory
-  strcat(cmd, name[2]);
-  system(cmd);
+  clean_build(repository_name);
 }
